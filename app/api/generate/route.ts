@@ -7,9 +7,17 @@ import { createAudioItem, updateAudioItem } from '@/lib/db';
 import { trackEvent } from '@/lib/posthog-server';
 import { generateAudio } from '@/lib/tts';
 
-const anthropic = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY,
-});
+// Lazily initialize Anthropic client to ensure API key is available
+let anthropic: Anthropic | null = null;
+
+function getAnthropicClient(): Anthropic {
+  if (!anthropic) {
+    anthropic = new Anthropic({
+      apiKey: process.env.ANTHROPIC_API_KEY,
+    });
+  }
+  return anthropic;
+}
 
 export async function POST(request: NextRequest) {
   try {
@@ -114,8 +122,9 @@ export async function POST(request: NextRequest) {
         const html = await fetchResponse.text();
 
         // Use Claude to extract the article text
-        const message = await anthropic.messages.create({
-          model: 'claude-sonnet-4-5-20250929',
+        const client = getAnthropicClient();
+        const message = await client.messages.create({
+          model: 'claude-3-5-sonnet-20241022',
           max_tokens: 8192,
           messages: [{
             role: 'user',
