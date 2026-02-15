@@ -179,7 +179,9 @@ ${html.slice(0, 100000)}
     const voiceId = voice || 'male1';
 
     try {
-      const ttsResponse = await fetch(`${process.env.NEXTAUTH_URL || 'http://localhost:3000'}/api/tts`, {
+      // Use BASE_URL for internal API calls, fallback to NEXTAUTH_URL, then localhost
+      const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || process.env.NEXTAUTH_URL || 'http://localhost:3000';
+      const ttsResponse = await fetch(`${baseUrl}/api/tts`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
