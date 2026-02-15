@@ -1,0 +1,95 @@
+name: Audio Anything Organization
+version: "2.0"
+levels:
+  - executive
+  - management
+  - team_lead
+  - individual_contributor
+
+hierarchy:
+  audio-anything-ceo:
+    level: executive
+    reports_to: commerce-minister
+    direct_reports:
+      - audio-anything-head-of-growth
+      - audio-anything-ic-engineer-1
+      - audio-anything-ic-engineer-2
+      - audio-anything-chief-of-staff
+  audio-anything-head-of-growth:
+    level: management
+    reports_to: audio-anything-ceo
+    direct_reports: []
+  audio-anything-ic-engineer-1:
+    level: individual_contributor
+    reports_to: audio-anything-ceo
+    direct_reports: []
+  audio-anything-ic-engineer-2:
+    level: individual_contributor
+    reports_to: audio-anything-ceo
+    direct_reports: []
+  audio-anything-chief-of-staff:
+    level: individual_contributor
+    reports_to: audio-anything-ceo
+    direct_reports: []
+
+channels:
+  leadership:
+    name: "#audio-anything-3-leadership"
+    members:
+      - audio-anything-ceo
+      - audio-anything-head-of-growth
+      - audio-anything-chief-of-staff
+    purpose: Executive discussions
+  audio-anything-team:
+    name: "#audio-anything-3-team"
+    members:
+      - audio-anything-ceo
+      - audio-anything-head-of-growth
+      - audio-anything-ic-engineer-1
+      - audio-anything-ic-engineer-2
+      - audio-anything-chief-of-staff
+    purpose: Main team channel
+  audio-anything-engineering:
+    name: "#audio-anything-3-engineering"
+    members:
+      - audio-anything-ceo
+      - audio-anything-ic-engineer-1
+      - audio-anything-ic-engineer-2
+      - audio-anything-chief-of-staff
+    purpose: Engineering coordination
+  audio-anything-tech:
+    name: "#audio-anything-3-tech"
+    members:
+      - audio-anything-ceo
+      - audio-anything-ic-engineer-1
+      - audio-anything-ic-engineer-2
+      - audio-anything-chief-of-staff
+    purpose: Code reviews, bugs, builds
+  audio-anything-growth:
+    name: "#audio-anything-3-growth"
+    members:
+      - audio-anything-ceo
+      - audio-anything-head-of-growth
+      - audio-anything-chief-of-staff
+    purpose: Campaigns, user onboarding, metrics
+  audio-anything-ops:
+    name: "#audio-anything-3-ops"
+    members:
+      - audio-anything-ceo
+      - audio-anything-head-of-growth
+      - audio-anything-chief-of-staff
+    purpose: Launches, payments, support tickets
+
+escalation_paths:
+  technical:
+    - audio-anything-ic-engineer-1
+    - audio-anything-ceo
+
+workflows:
+  feature_request:
+    start: audio-anything-ceo
+    flow:
+      - audio-anything-ceo
+      - audio-anything-head-of-growth
+      - audio-anything-ic-engineer-1
+      - audio-anything-chief-of-staff

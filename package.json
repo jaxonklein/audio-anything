@@ -1,0 +1,36 @@
+{
+  "name": "audio-anything",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.74.0",
+    "@auth/supabase-adapter": "^1.11.1",
+    "@clerk/nextjs": "^6.37.4",
+    "@supabase/supabase-js": "^2.48.1",
+    "next": "^15.1.6",
+    "next-auth": "^4.24.13",
+    "posthog-js": "^1.347.2",
+    "posthog-node": "^5.21.2",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "stripe": "^17.7.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "@types/react": "^19.0.6",
+    "@types/react-dom": "^19.0.2",
+    "autoprefixer": "^10.4.20",
+    "eslint": "^9.17.0",
+    "eslint-config-next": "^15.1.6",
+    "pg": "^8.18.0",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.7.2"
+  }
+}

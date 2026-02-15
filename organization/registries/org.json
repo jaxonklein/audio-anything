@@ -1,0 +1,52 @@
+{
+  "departments": {
+    "product": {
+      "name": "Product",
+      "description": "Handles product development and operations.",
+      "manager": "audio-anything-ceo",
+      "teams": ["audio-anything-team"],
+      "channels": ["#audio-anything-team"]
+    }
+  },
+  "teams": {
+    "audio-anything-team": {
+      "name": "Audio Anything Team",
+      "department": "product",
+      "lead": "audio-anything-ceo",
+      "members": ["audio-anything-head-of-growth", "audio-anything-ic-engineer-1", "audio-anything-ic-engineer-2", "audio-anything-chief-of-staff"],
+      "channel": "#audio-anything-team"
+    }
+  },
+  "reporting": {
+    "audio-anything-ceo": {
+      "level": "executive",
+      "reports_to": "commerce-minister",
+      "direct_reports": ["audio-anything-head-of-growth", "audio-anything-ic-engineer-1", "audio-anything-ic-engineer-2", "audio-anything-chief-of-staff"]
+    },
+    "audio-anything-head-of-growth": {
+      "level": "management",
+      "reports_to": "audio-anything-ceo",
+      "direct_reports": []
+    },
+    "audio-anything-ic-engineer-1": {
+      "level": "individual_contributor",
+      "reports_to": "audio-anything-ceo",
+      "direct_reports": []
+    },
+    "audio-anything-ic-engineer-2": {
+      "level": "individual_contributor",
+      "reports_to": "audio-anything-ceo",
+      "direct_reports": []
+    },
+    "audio-anything-chief-of-staff": {
+      "level": "individual_contributor",
+      "reports_to": "audio-anything-ceo",
+      "direct_reports": []
+    }
+  },
+  "escalation": {
+    "technical": {
+      "path": ["audio-anything-ic-engineer-1", "audio-anything-ceo"]
+    }
+  }
+}

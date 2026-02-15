@@ -1,0 +1,48 @@
+{
+  "areas": [
+    {
+      "id": "audio-anything-project-management",
+      "name": "Audio Anything Project Management",
+      "description": "Oversees overall project strategy and operations.",
+      "path": "docs/",
+      "type": "function",
+      "aliases": ["management"],
+      "owner": "audio-anything-ceo",
+      "team": "audio-anything-team",
+      "department": "product"
+    },
+    {
+      "id": "audio-anything-growth",
+      "name": "Audio Anything Growth",
+      "description": "Handles user acquisition and marketing.",
+      "path": "src/growth/",
+      "type": "function",
+      "aliases": ["marketing"],
+      "owner": "audio-anything-head-of-growth",
+      "team": "audio-anything-team",
+      "department": "product"
+    },
+    {
+      "id": "audio-anything-implementation",
+      "name": "Audio Anything Implementation",
+      "description": "Core engineering and feature development.",
+      "path": "src/",
+      "type": "function",
+      "aliases": ["engineering"],
+      "owner": "audio-anything-ic-engineer-1",
+      "team": "audio-anything-team",
+      "department": "product"
+    },
+    {
+      "id": "audio-anything-operations",
+      "name": "Audio Anything Operations",
+      "description": "Handles coordination and ops.",
+      "path": "docs/ops/",
+      "type": "function",
+      "aliases": ["ops"],
+      "owner": "audio-anything-chief-of-staff",
+      "team": "audio-anything-team",
+      "department": "product"
+    }
+  ]
+}

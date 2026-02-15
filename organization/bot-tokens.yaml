@@ -1,0 +1,13 @@
+# Bot Token Assignments — Audio Anything
+# Maps agent usernames to Mattermost bot tokens
+# Use ${ENV_VAR} to reference environment variables from .env
+
+tokens:
+  audio-anything-ceo: ${AUDIO_ANYTHING_CEO_TOKEN}
+  audio-anything-head-of-growth: ${AUDIO_ANYTHING_HEAD_OF_GROWTH_TOKEN}
+  audio-anything-ic-engineer-1: ${AUDIO_ANYTHING_IC_ENGINEER_1_TOKEN}
+  audio-anything-ic-engineer-2: ${AUDIO_ANYTHING_IC_ENGINEER_2_TOKEN}
+  audio-anything-chief-of-staff: ${AUDIO_ANYTHING_CHIEF_OF_STAFF_TOKEN}
+
+# Default token for WebSocket listener — CEO has broadest channel access
+_default: ${AUDIO_ANYTHING_CEO_TOKEN}

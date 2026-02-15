@@ -1,0 +1,50 @@
+{
+  "version": "1.0",
+  "description": "Skills registry for Audio Anything",
+  "categories": {
+    "management": {
+      "name": "Management",
+      "description": "Strategic oversight and leadership skills.",
+      "skills": [
+        {
+          "id": "strategy",
+          "description": "Develops business strategy and vision.",
+          "agents": ["audio-anything-ceo"]
+        }
+      ]
+    },
+    "growth": {
+      "name": "Growth",
+      "description": "User acquisition and marketing skills.",
+      "skills": [
+        {
+          "id": "marketing",
+          "description": "Plans and executes marketing campaigns.",
+          "agents": ["audio-anything-head-of-growth"]
+        }
+      ]
+    },
+    "engineering": {
+      "name": "Engineering",
+      "description": "Software development skills.",
+      "skills": [
+        {
+          "id": "coding",
+          "description": "Writes and maintains code.",
+          "agents": ["audio-anything-ic-engineer-1", "audio-anything-ic-engineer-2"]
+        }
+      ]
+    },
+    "operations": {
+      "name": "Operations",
+      "description": "Coordination and ops skills.",
+      "skills": [
+        {
+          "id": "coordination",
+          "description": "Manages ops and team coordination.",
+          "agents": ["audio-anything-chief-of-staff"]
+        }
+      ]
+    }
+  }
+}

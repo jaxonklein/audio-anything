@@ -1,0 +1,59 @@
+{
+  "agents": [
+    {
+      "username": "audio-anything-ceo",
+      "name": "Maren Voss",
+      "role": "CEO",
+      "department": "product",
+      "team": "audio-anything-team",
+      "level": "executive",
+      "reports_to": "commerce-minister",
+      "component": "project-management",
+      "mattermost_channel": "#audio-anything-team"
+    },
+    {
+      "username": "audio-anything-head-of-growth",
+      "name": "Kavi Patel",
+      "role": "Head of Growth",
+      "department": "product",
+      "team": "audio-anything-team",
+      "level": "management",
+      "reports_to": "audio-anything-ceo",
+      "component": "growth",
+      "mattermost_channel": "#audio-anything-growth"
+    },
+    {
+      "username": "audio-anything-ic-engineer-1",
+      "name": "Theo Nakamura",
+      "role": "IC Engineer",
+      "department": "product",
+      "team": "audio-anything-team",
+      "level": "individual_contributor",
+      "reports_to": "audio-anything-ceo",
+      "component": "implementation",
+      "mattermost_channel": "#audio-anything-engineering"
+    },
+    {
+      "username": "audio-anything-ic-engineer-2",
+      "name": "Sable Reeves",
+      "role": "IC Engineer",
+      "department": "product",
+      "team": "audio-anything-team",
+      "level": "individual_contributor",
+      "reports_to": "audio-anything-ceo",
+      "component": "implementation",
+      "mattermost_channel": "#audio-anything-engineering"
+    },
+    {
+      "username": "audio-anything-chief-of-staff",
+      "name": "Jonah Ekberg",
+      "role": "Chief of Staff",
+      "department": "product",
+      "team": "audio-anything-team",
+      "level": "individual_contributor",
+      "reports_to": "audio-anything-ceo",
+      "component": "operations",
+      "mattermost_channel": "#audio-anything-ops"
+    }
+  ]
+}

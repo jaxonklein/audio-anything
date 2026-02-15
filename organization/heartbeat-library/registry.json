@@ -1,0 +1,16 @@
+{
+  "skills": [
+    {
+      "name": "check-todos",
+      "description": "Check for pending tasks and work on them"
+    },
+    {
+      "name": "check-project-status",
+      "description": "CEO: Review project status and ensure team has clear next steps"
+    },
+    {
+      "name": "check-in-with-manager",
+      "description": "Employee: If idle with no tasks, propose work to manager"
+    }
+  ]
+}
