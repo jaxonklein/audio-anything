@@ -35,7 +35,7 @@ export default function AudioPlayer({
 }: AudioPlayerProps) {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [currentTime, setCurrentTime] = useState(initialPosition);
+  const [currentTime, setCurrentTime] = useState(0); // Always start at 0 (position saving disabled)
   const [duration, setDuration] = useState(0);
   const [playbackSpeed, setPlaybackSpeed] = useState(1);
   const [selectedVoice, setSelectedVoice] = useState("male1");
