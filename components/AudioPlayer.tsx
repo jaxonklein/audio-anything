@@ -70,9 +70,10 @@ export default function AudioPlayer({
     };
 
     checkExpiration();
-    const interval = setInterval(checkExpiration, 1000);
-
-    return () => clearInterval(interval);
+    // DISABLED: Expiration check interval was causing audio seek every 1000ms
+    // const interval = setInterval(checkExpiration, 1000);
+    // return () => clearInterval(interval);
+    return () => {};
   }, [expiresAt]);
 
   useEffect(() => {
