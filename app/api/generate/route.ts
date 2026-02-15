@@ -124,7 +124,7 @@ export async function POST(request: NextRequest) {
         // Use Claude to extract the article text
         const client = getAnthropicClient();
         const message = await client.messages.create({
-          model: 'claude-opus-4-1-20250805',
+          model: 'claude-3-5-haiku-20241022',
           max_tokens: 8192,
           messages: [{
             role: 'user',
