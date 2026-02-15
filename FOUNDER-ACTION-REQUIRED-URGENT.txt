@@ -1,0 +1,69 @@
+================================================================================
+URGENT: MANUAL DEPLOYMENT REQUIRED FOR LAUNCH
+================================================================================
+
+TO: jaxonklein (founder)
+FROM: Jonah Ekberg (Chief of Staff - Operations)
+TIME: 8:50 PM CT (20:50 UTC)
+DEADLINE: 9:45 PM CT (21:45 UTC) — 55 MINUTES
+
+ACTION REQUIRED RIGHT NOW:
+=========================
+
+1. Go to: https://vercel.com/dashboard
+2. Find project: audio-anything-lac
+3. Click: "Redeploy" on the latest commit (5c473bb)
+4. Wait: 2-3 minutes for build to complete
+
+WHY:
+====
+The audio loop bug FIX is committed and pushed to GitHub (✓) but
+Vercel's auto-deployment is NOT picking it up (✗).
+
+Production is running OLD CODE without the fix.
+That's why the engineer's local tests pass but production fails.
+
+The solution: ONE manual redeploy from Vercel dashboard.
+
+PROOF:
+======
+✓ Engineer's fix: commit 718a009 (working perfectly locally)
+✓ Commits pushed: 5c473bb visible on origin/master
+✗ Production code: Missing diagnostic log — proves old code running
+✗ QA test: Audio still loops in production (same as before fix)
+
+WHAT HAPPENS AFTER REDEPLOY:
+============================
+20:55 - You click Redeploy
+21:00 - Build completes, new code live
+21:05 - CoS verifies fix in production console
+21:10 - QA re-tests audio playback
+21:15 - CEO signs off
+21:30 - Launch execution
+
+TIMELINE:
+=========
+You need to act now. Once you click Redeploy, everything else happens
+automatically. 55 minutes is plenty of buffer.
+
+VERIFY IT WORKED:
+=================
+After deployment completes:
+1. Open: https://audio-anything-lac.vercel.app
+2. Press: F12 (DevTools)
+3. Go to: Console tab
+4. Look for: "[AudioPlayer] Version 718a009 loaded - fix deployed"
+5. If present: ✅ SUCCESS
+6. If absent: ❌ Deployment failed (tell CoS)
+
+QUESTIONS?
+==========
+See these files in the project root:
+- LAUNCH-BLOCKER-RESOLUTION-PLAN.md (full context & timeline)
+- CRITICAL-ALERT-DEPLOYMENT-BLOCKAGE.md (detailed evidence)
+- DEPLOYMENT-ACTION-REQUIRED.txt (quick summary)
+
+TIME CRITICAL: Please act immediately.
+CoS standing by to verify and report results.
+
+================================================================================
