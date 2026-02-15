@@ -149,8 +149,11 @@ ${html.slice(0, 100000)}
           );
         }
         console.error('Content extraction failed:', error);
+        console.error('Error details:', JSON.stringify(error, null, 2));
+        console.error('Error message:', error?.message);
+        console.error('Error stack:', error?.stack);
         return NextResponse.json(
-          { error: 'Unable to extract article text. This content may be paywalled or protected.' },
+          { error: 'Unable to extract article text. This content may be paywalled or protected.', details: error?.message },
           { status: 400 }
         );
       }

@@ -206,10 +206,40 @@ Thanks for being patient. Worth the wait.
 
 ---
 
+## UPDATE: URL Extraction Blocker (4:01 PM)
+
+**Situation Changed:**
+- Text-only path works (users can paste text)
+- **URL path broken** (400 error on all URL inputs)
+- This is the primary value prop ("Paste a URL")
+- Core feature partially broken
+
+**Revised Timeline Decision Tree:**
+
+**If URL fix takes 15-30 min (fix by 4:15-4:30 PM):**
+- ✅ Still launch Sunday 9 AM as planned
+- Growth action: None, proceed normally
+
+**If URL fix takes 1-2 hours (fix by 5-6 PM):**
+- ⚠️ Borderline for Sunday launch (tight QA window)
+- Growth action: Monitor progress, be ready to pivot to Monday at 5 PM if fix stalls
+- Contingency: Have Monday delay message ready to send
+
+**If URL fix takes 3+ hours (fix by 7 PM+):**
+- 📅 Recommend pushing to Monday morning
+- Growth action: Prepare delay messages, standby for founder decision
+- Message testers: "Small issue to fix, launching Monday instead of Sunday"
+
+**If URL extraction needs redesign (complex issue):**
+- 📅 Likely Tuesday launch or later
+- Growth action: Prepare extended delay messaging, reset expectations with beta testers
+
+---
+
 ## Standing By
 
-Growth team is ready to pivot on founder's signal. No Day 1 changes until engineer reports fix is live + QA re-verifies.
+Growth team is ready to pivot on founder's signal. Waiting for engineer's ETA on URL extraction fix.
 
-**Status: 🟡 READY TO PIVOT**
+**Status: 🟡 READY TO PIVOT ON ENGINEER'S TIMELINE**
 
-All contingency messages drafted. Awaiting engineering update + founder decision on final launch timing.
+All contingency messages drafted and updated for URL blocker. Awaiting engineering ETA + founder decision on revised launch timing.
