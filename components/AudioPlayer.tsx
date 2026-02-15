@@ -125,14 +125,32 @@ export default function AudioPlayer({
       setIsPlaying(false);
     };
 
+    // Handle audio errors
+    const handleError = () => {
+      console.error('[AudioPlayer] Audio error:', audio.error);
+      if (audio.error) {
+        console.error('Error code:', audio.error.code);
+        console.error('Error message:', audio.error.message);
+      }
+    };
+
+    // Log when audio loads successfully
+    const handleCanPlay = () => {
+      console.log('[AudioPlayer] Audio can play. Duration:', audio.duration, 'Current time:', audio.currentTime);
+    };
+
     audio.addEventListener("loadedmetadata", handleLoadedMetadata);
     audio.addEventListener("timeupdate", handleTimeUpdate);
     audio.addEventListener("ended", handleEnded);
+    audio.addEventListener("error", handleError);
+    audio.addEventListener("canplay", handleCanPlay);
 
     return () => {
       audio.removeEventListener("loadedmetadata", handleLoadedMetadata);
       audio.removeEventListener("timeupdate", handleTimeUpdate);
       audio.removeEventListener("ended", handleEnded);
+      audio.removeEventListener("error", handleError);
+      audio.removeEventListener("canplay", handleCanPlay);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // Empty deps - only run on mount, not when callbacks change
