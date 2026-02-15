@@ -18,23 +18,43 @@ export async function generateAudio(text: string, voiceId: string = 'male1'): Pr
     throw new Error('ElevenLabs API key not configured');
   }
 
-  // Truncate text to ElevenLabs character limit (5000 chars max)
-  // This ensures the audio isn't truncated mid-word
+  // ElevenLabs character limit: 5000 chars max per request
   const MAX_CHARS = 5000;
-  const truncatedText = text.length > MAX_CHARS ? text.substring(0, MAX_CHARS) : text;
 
-  // Call ElevenLabs API
+  // If text is short enough, generate directly
+  if (text.length <= MAX_CHARS) {
+    return await generateChunk(text, elevenLabsVoiceId);
+  }
+
+  // For long text, split into chunks and concatenate audio
+  const chunks = splitTextIntoChunks(text, MAX_CHARS);
+  console.log(`[TTS] Generating ${chunks.length} audio chunks for ${text.length} characters`);
+
+  const audioBuffers: ArrayBuffer[] = [];
+
+  for (let i = 0; i < chunks.length; i++) {
+    console.log(`[TTS] Generating chunk ${i + 1}/${chunks.length} (${chunks[i].length} chars)`);
+    const chunkBuffer = await generateChunk(chunks[i], elevenLabsVoiceId);
+    audioBuffers.push(chunkBuffer);
+  }
+
+  // Concatenate all audio buffers into single MP3
+  return concatenateAudioBuffers(audioBuffers);
+}
+
+// Generate audio for a single text chunk
+async function generateChunk(text: string, elevenLabsVoiceId: string): Promise<ArrayBuffer> {
   const response = await fetch(
     `https://api.elevenlabs.io/v1/text-to-speech/${elevenLabsVoiceId}`,
     {
       method: 'POST',
       headers: {
         'Accept': 'audio/mpeg',
-        'xi-api-key': process.env.ELEVENLABS_API_KEY,
+        'xi-api-key': process.env.ELEVENLABS_API_KEY!,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        text: truncatedText,
+        text,
         model_id: 'eleven_monolingual_v1',
         voice_settings: {
           stability: 0.5,
@@ -51,4 +71,62 @@ export async function generateAudio(text: string, voiceId: string = 'male1'): Pr
   }
 
   return await response.arrayBuffer();
+}
+
+// Split text into chunks at natural boundaries (sentences/paragraphs)
+function splitTextIntoChunks(text: string, maxChars: number): string[] {
+  const chunks: string[] = [];
+  let currentChunk = '';
+
+  // Split by paragraphs first (double newlines)
+  const paragraphs = text.split(/\n\n+/);
+
+  for (const paragraph of paragraphs) {
+    // If adding this paragraph would exceed limit, save current chunk and start new one
+    if (currentChunk.length + paragraph.length + 2 > maxChars && currentChunk.length > 0) {
+      chunks.push(currentChunk.trim());
+      currentChunk = '';
+    }
+
+    // If a single paragraph is too long, split by sentences
+    if (paragraph.length > maxChars) {
+      const sentences = paragraph.match(/[^.!?]+[.!?]+/g) || [paragraph];
+
+      for (const sentence of sentences) {
+        if (currentChunk.length + sentence.length > maxChars && currentChunk.length > 0) {
+          chunks.push(currentChunk.trim());
+          currentChunk = '';
+        }
+        currentChunk += sentence;
+      }
+    } else {
+      // Add paragraph to current chunk
+      currentChunk += (currentChunk ? '\n\n' : '') + paragraph;
+    }
+  }
+
+  // Add final chunk
+  if (currentChunk.trim()) {
+    chunks.push(currentChunk.trim());
+  }
+
+  return chunks;
+}
+
+// Concatenate multiple MP3 audio buffers into a single buffer
+function concatenateAudioBuffers(buffers: ArrayBuffer[]): ArrayBuffer {
+  // Calculate total size
+  const totalLength = buffers.reduce((acc, buf) => acc + buf.byteLength, 0);
+
+  // Create new buffer to hold concatenated audio
+  const result = new Uint8Array(totalLength);
+
+  // Copy each buffer into result
+  let offset = 0;
+  for (const buffer of buffers) {
+    result.set(new Uint8Array(buffer), offset);
+    offset += buffer.byteLength;
+  }
+
+  return result.buffer;
 }
