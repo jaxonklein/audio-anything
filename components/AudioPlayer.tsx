@@ -79,10 +79,11 @@ export default function AudioPlayer({
     const audio = audioRef.current;
     if (!audio) return;
 
-    // Set initial position
-    if (initialPosition > 0) {
-      audio.currentTime = initialPosition;
-    }
+    // DISABLED: Initial position seeking was causing loop bug
+    // TODO: Re-enable after fixing the re-render loop issue
+    // if (initialPosition > 0) {
+    //   audio.currentTime = initialPosition;
+    // }
 
     // Update duration when metadata loads
     const handleLoadedMetadata = () => {
@@ -92,10 +93,11 @@ export default function AudioPlayer({
     // Update current time as audio plays
     const handleTimeUpdate = () => {
       setCurrentTime(audio.currentTime);
-      // Save playback position every 5 seconds
-      if (onPlaybackUpdate && Math.floor(audio.currentTime) % 5 === 0) {
-        onPlaybackUpdate(audio.currentTime);
-      }
+      // DISABLED: Playback position saving was causing loop bug
+      // TODO: Re-enable after fixing the re-render loop issue
+      // if (onPlaybackUpdate && Math.floor(audio.currentTime) % 5 === 0) {
+      //   onPlaybackUpdate(audio.currentTime);
+      // }
     };
 
     // Handle audio end
