@@ -33,9 +33,9 @@ export default function AudioPlayer({
   sourceText,
   audioItemId,
 }: AudioPlayerProps) {
-  // Diagnostic: Log version info to confirm 718a009 is deployed
+  // Diagnostic: Log version info to confirm deployment
   if (typeof window !== 'undefined') {
-    console.log('[AudioPlayer] Version 718a009 loaded - fix deployed');
+    console.log('[AudioPlayer] Version 8a6c401 loaded - critical fix for uncontrolled slider');
   }
 
   const audioRef = useRef<HTMLAudioElement>(null);
@@ -96,28 +96,47 @@ export default function AudioPlayer({
     // Update duration when metadata loads
     const handleLoadedMetadata = () => {
       setDuration(audio.duration);
+      // Initialize slider to 0 when audio loads
+      if (sliderRef.current) {
+        sliderRef.current.value = '0';
+      }
     };
 
     // Update current time as audio plays
     const handleTimeUpdate = () => {
-      // Update slider directly via DOM to avoid React re-renders
-      // This prevents potential issues with frequently changing React state
-      if (sliderRef.current) {
+      // CRITICAL: Update ONLY slider DOM and minimal state
+      // Do NOT call setCurrentTime on every timeupdate - it causes re-renders
+      // that interfere with audio playback
+
+      if (sliderRef.current && audio && audio.duration) {
+        const currentSeconds = Math.floor(audio.currentTime * 10) / 10;
+        const prevValue = parseFloat(sliderRef.current.value);
+
+        // Update slider HTML attribute directly via DOM (no React state)
         sliderRef.current.value = audio.currentTime.toString();
+
+        // Debug: Log any unexpected seeking behavior
+        if (currentSeconds < prevValue - 0.1) {
+          console.warn('[AudioPlayer] Unexpected seek backward detected:', {
+            previous: prevValue.toFixed(2),
+            current: currentSeconds.toFixed(2),
+            duration: audio.duration.toFixed(2)
+          });
+        }
+
+        // Also update aria-valuenow for accessibility
+        sliderRef.current.setAttribute('aria-valuenow', currentSeconds.toFixed(1));
       }
 
-      // Still update state, but less frequently (every second instead of every 250ms)
+      // CRITICAL: Do NOT update React state on every timeupdate
+      // This causes constant re-renders which seek the audio back
+      // The slider visual is already updated via DOM above
+      // State update only needed once per second for display (if we need it at all)
       const now = Date.now();
       if (now - lastTimeUpdateRef.current > 1000) {
         setCurrentTime(audio.currentTime);
         lastTimeUpdateRef.current = now;
       }
-
-      // DISABLED: Playback position saving was causing loop bug
-      // TODO: Re-enable after fixing the re-render loop issue
-      // if (onPlaybackUpdate && Math.floor(audio.currentTime) % 5 === 0) {
-      //   onPlaybackUpdate(audio.currentTime);
-      // }
     };
 
     // Handle audio end
@@ -295,9 +314,12 @@ export default function AudioPlayer({
           ref={sliderRef}
           type="range"
           min="0"
-          max={duration || 0}
-          defaultValue="0"
+          max={Math.floor(duration) || 0}
           onChange={handleSeek}
+          aria-label="Audio progress"
+          aria-valuemin="0"
+          aria-valuemax={Math.floor(duration) || 0}
+          aria-valuenow={Math.floor(currentTime) || 0}
           className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer accent-purple-600"
         />
         <div className="flex justify-between text-sm text-gray-600 dark:text-gray-400 mt-1">
