@@ -1,16 +1,17 @@
 # Product Hunt Launch — Audio Anything / Readcast
 
-**Launch Date:** Sunday, February 16, 2025, 12:01 AM PST
+**Launch Date:** Thursday, February 20, 2026, 12:01 AM PST
+**Context:** Post-beta public launch (20 private beta users on Monday, Feb 17)
 
 ---
 
 ## 🎯 Product Hunt Post
 
 ### Title
-**Turn any article into a podcast in 30 seconds**
+**Turn any article into a podcast in 30 seconds** (Beta-tested by 20 users)
 
 ### Tagline
-Paste a link. Pick a voice. Listen while you commute, work out, or do literally anything else.
+Paste a link. Pick a voice. Listen while you commute, work out, or do literally anything else. Free: 3/day. Pro: $5/mo unlimited.
 
 ### Gallery Screenshots (5 images)
 1. Hero: App interface with sample article pasted, audio playing

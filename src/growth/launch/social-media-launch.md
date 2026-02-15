@@ -1,6 +1,7 @@
-# Social Media Launch Assets — Audio Anything / Readcast
+# Social Media Launch Assets — Audio Anything
 
-**Launch Day:** Sunday, February 16, 2025
+**Launch Day:** Thursday, February 20, 2026 (Post-beta public launch)
+**Prerequisite:** Private beta (Monday Feb 17) must complete for messaging to be data-informed
 
 ---
 
@@ -9,18 +10,18 @@
 ### Post 1: Announcement (12:15 AM PST)
 
 ---
-i built something over the last 48 hours.
+Audio Anything is live.
 
-you have 2000 articles in your reading backlog. you're never going to read them all.
+turn any article into podcast-quality audio. paste a link, pick a voice, listen on your commute.
 
-but what if you could *listen* to them?
+free: 3 generations/day
+pro: $5/month unlimited
 
-meet Readcast: paste any URL → get instant podcast-quality audio → listen on your commute
+just shipped the private beta. 20 early users loved it.
 
-🎙️ free tier: 3/hour
-💳 pro: $4.99/mo unlimited
+now it's public.
 
-soundcheck: [LINK]
+[LINK]
 
 ---
 
