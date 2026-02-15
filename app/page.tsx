@@ -268,7 +268,7 @@ export default function Home() {
                   type="button"
                   onClick={() => {
                     setInputMode('url');
-                    setUrl('https://paulgraham.com/maker.html');
+                    setUrl('https://paulgraham.com/greatwork.html');
                   }}
                   className="px-4 py-2 rounded-lg text-sm font-medium bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 hover:bg-green-200 dark:hover:bg-green-900/50 transition-colors"
                 >
