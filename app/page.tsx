@@ -78,8 +78,10 @@ export default function Home() {
     };
 
     updateCountdown();
-    const interval = setInterval(updateCountdown, 1000);
-    return () => clearInterval(interval);
+    // DISABLED: Countdown timer was causing audio seek every 1000ms
+    // const interval = setInterval(updateCountdown, 1000);
+    // return () => clearInterval(interval);
+    return () => {};
   }, [resetAt]);
 
   const handleSubmit = async (e: React.FormEvent) => {
