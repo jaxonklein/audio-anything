@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useUser, SignInButton, UserButton } from "@clerk/nextjs";
 import AudioPlayer from "@/components/AudioPlayer";
 import ErrorMessage from "@/components/ErrorMessage";
@@ -152,6 +152,30 @@ export default function Home() {
       setIsLoading(false);
     }
   };
+
+  // Memoize playback update callback to prevent AudioPlayer re-initialization on every render
+  const handlePlaybackUpdate = useCallback(async (position: number) => {
+    if (!audioData?.id) return;
+
+    // Save to cookies for anonymous users
+    savePlaybackPosition(audioData.id, position);
+
+    // Save to database for authenticated users
+    if (isSignedIn && audioData.id) {
+      try {
+        await fetch('/api/playback', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            audioItemId: audioData.id,
+            position,
+          }),
+        });
+      } catch (err) {
+        console.error('Failed to save playback position:', err);
+      }
+    }
+  }, [audioData?.id, isSignedIn]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 dark:from-gray-900 dark:to-gray-800">
@@ -389,26 +413,7 @@ export default function Home() {
                 expiresAt={audioData.expiresAt}
                 audioItemId={audioData.id}
                 initialPosition={getPlaybackPosition(audioData.id)}
-                onPlaybackUpdate={async (position) => {
-                  // Save to cookies for anonymous users
-                  savePlaybackPosition(audioData.id, position);
-
-                  // Save to database for authenticated users
-                  if (isSignedIn && audioData.id) {
-                    try {
-                      await fetch('/api/playback', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                          audioItemId: audioData.id,
-                          position,
-                        }),
-                      });
-                    } catch (err) {
-                      console.error('Failed to save playback position:', err);
-                    }
-                  }
-                }}
+                onPlaybackUpdate={handlePlaybackUpdate}
               />
             </>
           )}
