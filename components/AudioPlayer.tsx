@@ -112,7 +112,7 @@ export default function AudioPlayer({
       audio.removeEventListener("timeupdate", handleTimeUpdate);
       audio.removeEventListener("ended", handleEnded);
     };
-  }, [initialPosition, onPlaybackUpdate]);
+  }, [onPlaybackUpdate]); // Removed initialPosition from deps - should only seek on initial mount
 
   const togglePlayPause = () => {
     const audio = audioRef.current;
