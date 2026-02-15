@@ -34,6 +34,8 @@ export default function AudioPlayer({
   audioItemId,
 }: AudioPlayerProps) {
   const audioRef = useRef<HTMLAudioElement>(null);
+  const sliderRef = useRef<HTMLInputElement>(null);
+  const lastTimeUpdateRef = useRef<number>(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0); // Always start at 0 (position saving disabled)
   const [duration, setDuration] = useState(0);
@@ -93,7 +95,19 @@ export default function AudioPlayer({
 
     // Update current time as audio plays
     const handleTimeUpdate = () => {
-      setCurrentTime(audio.currentTime);
+      // Update slider directly via DOM to avoid React re-renders
+      // This prevents potential issues with frequently changing React state
+      if (sliderRef.current) {
+        sliderRef.current.value = audio.currentTime.toString();
+      }
+
+      // Still update state, but less frequently (every second instead of every 250ms)
+      const now = Date.now();
+      if (now - lastTimeUpdateRef.current > 1000) {
+        setCurrentTime(audio.currentTime);
+        lastTimeUpdateRef.current = now;
+      }
+
       // DISABLED: Playback position saving was causing loop bug
       // TODO: Re-enable after fixing the re-render loop issue
       // if (onPlaybackUpdate && Math.floor(audio.currentTime) % 5 === 0) {
@@ -226,7 +240,15 @@ export default function AudioPlayer({
       </div>
 
       {/* Audio Element (hidden) */}
-      <audio ref={audioRef} src={audioUrl} preload="metadata" />
+      {/* Changed preload from "metadata" to "auto" to avoid range-request seeking issues with data URLs */}
+      {/* Added key prop to prevent unnecessary re-mounting when parent re-renders */}
+      <audio
+        key={audioItemId || audioUrl.substring(0, 100)}
+        ref={audioRef}
+        src={audioUrl}
+        preload="auto"
+        loop={false}
+      />
 
       {/* Waveform Visualization (simplified for now - will enhance later) */}
       <div className="mb-4 h-24 bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center">
@@ -247,10 +269,11 @@ export default function AudioPlayer({
       {/* Seek Bar */}
       <div className="mb-4">
         <input
+          ref={sliderRef}
           type="range"
           min="0"
           max={duration || 0}
-          value={currentTime}
+          defaultValue="0"
           onChange={handleSeek}
           className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer accent-purple-600"
         />
