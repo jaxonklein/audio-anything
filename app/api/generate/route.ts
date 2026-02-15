@@ -123,6 +123,9 @@ export async function POST(request: NextRequest) {
 
         // Use Claude to extract the article text
         const client = getAnthropicClient();
+        // DEBUG: Verify deployment has the fix
+        console.log('[DEPLOYMENT_CHECK] max_tokens set to 100000 - new build confirmed');
+
         const message = await client.messages.create({
           model: 'claude-3-5-haiku-20241022',
           max_tokens: 100000, // Increased to support long-form articles (books, essays)
