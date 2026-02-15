@@ -1,0 +1,44 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e6]:
+        - heading "Audio Anything" [level=1] [ref=e7]
+        - paragraph [ref=e8]: Read less, listen more. Turn any article into podcast-quality audio instantly.
+        - paragraph [ref=e9]: Paste a URL or text • Choose your voice • Listen anywhere
+      - generic [ref=e10]:
+        - button "Switch to light mode" [ref=e11] [cursor=pointer]:
+          - img [ref=e12]
+        - generic [ref=e14]:
+          - link "Pricing" [ref=e47] [cursor=pointer]:
+            - /url: /pricing
+          - button "Sign In" [ref=e48] [cursor=pointer]
+    - generic [ref=e15]:
+      - generic [ref=e16]:
+        - generic [ref=e17]: 🎙️
+        - heading "Studio-Quality Voices" [level=3] [ref=e18]
+        - paragraph [ref=e19]: Natural-sounding male and female voices that bring your content to life
+      - generic [ref=e20]:
+        - generic [ref=e21]: ⚡
+        - heading "Lightning Fast" [level=3] [ref=e22]
+        - paragraph [ref=e23]: Convert 5,000-word articles in seconds. Listen while you commute, exercise, or cook.
+      - generic [ref=e24]:
+        - generic [ref=e25]: 📱
+        - heading "Listen Anywhere" [level=3] [ref=e26]
+        - paragraph [ref=e27]: Works on all devices. Save your audio library and sync playback seamlessly.
+    - generic [ref=e29]:
+      - generic [ref=e30]:
+        - button "Paste URL" [ref=e31] [cursor=pointer]
+        - button "Paste Text" [ref=e32] [cursor=pointer]
+        - button "✨ Try Example Article" [ref=e33] [cursor=pointer]
+      - generic [ref=e34]:
+        - generic [ref=e35]: Article URL
+        - textbox "Article URL" [ref=e36]:
+          - /placeholder: Paste a link to an article, blog post, or PDF
+      - button "Generate Audio" [ref=e37] [cursor=pointer]
+    - paragraph [ref=e39]: 1 generations remaining this hour
+  - button "Talk to the Team 😊 Questions? We're here to help!" [ref=e40] [cursor=pointer]:
+    - img [ref=e41]
+    - generic [ref=e43]:
+      - generic [ref=e44]: Talk to the Team 😊
+      - generic [ref=e45]: Questions? We're here to help!
+  - alert [ref=e46]

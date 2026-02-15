@@ -104,6 +104,33 @@ See you Sunday.
 
 ---
 
+## MONDAY DELAY MESSAGE (February 17, 2026)
+
+**Quick Update - Launch Rescheduled to Monday 9 AM**
+
+Hey [Name] — quick update on Audio Anything.
+
+We had a small technical issue we wanted to fix before launch. Should be resolved by tomorrow morning.
+
+New plan: Private beta launch **Monday 9 AM CT** instead of Sunday. Same everything else — you're still one of the first 20.
+
+See you tomorrow. Appreciate your patience.
+
+—Jackson
+
+---
+
+**Tone:** Matter-of-fact, not apologetic. Positions delay as quality decision, not failure. Sets realistic expectations for Day 1.
+
+**Key elements:**
+- ✅ Acknowledges change without oversharing
+- ✅ Frames as quality/professionalism ("wanted to fix before launch")
+- ✅ Clear new timing (Monday 9 AM CT)
+- ✅ Reassures about status (still first 20, same deal)
+- ✅ Personal touch without being casual
+
+---
+
 ## Invite Link Format
 
 **Unique invite link structure:**

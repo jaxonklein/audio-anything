@@ -1,9 +1,12 @@
 # Private Beta Launch Pack — Audio Anything
-## Sunday, February 16, 2026 @ 9:00 AM CT
+## Monday, February 17, 2026 @ 9:00 AM CT
+
+**⚠️ UPDATE:** Vercel deployment blocker forced reschedule from Sunday 9 AM to Monday 9 AM.
+See FINAL-GROWTH-STATUS-2026-02-15.md for details on delay.
 
 ---
 
-## 📋 Pre-Launch Checklist (Saturday 11:00 PM CT)
+## 📋 Pre-Launch Checklist (Sunday 11:00 PM CT)
 
 ### By Founder
 - [ ] **Provide beta tester list** (10-20 names + WhatsApp numbers)
@@ -29,13 +32,13 @@
 
 ---
 
-## 🚀 Launch Timeline — Sunday 9:00 AM - 5:00 PM CT
+## 🚀 Launch Timeline — Monday 9:00 AM - 5:00 PM CT
 
 ### 9:00 AM — Send Beta Invites
 **Owner: Founder + Growth**
 
 1. **Founder sends WhatsApp invites** to all 10-20 testers
-   - Use Version C (personalized): "You've been selected..."
+   - Use delay-adjusted message: "Quick update: Vercel deployment issue forced reschedule to Monday. Same everything else..."
    - Include unique invite link: `https://audio-anything-lac.vercel.app?invite=BETA-[NAME]`
    - Stagger sends over 5 minutes (don't flood them all at once)
 
@@ -44,7 +47,7 @@
    - Time to first generation
    - Any immediate errors
 
-### 9:15 AM - 10:00 AM — First Hour (Peak Activity)
+### 9:15 AM - 10:00 AM — First Hour (Peak Activity - Monday)
 **Owner: Engineer + Growth**
 
 **Engineer:**
