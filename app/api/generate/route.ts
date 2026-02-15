@@ -125,7 +125,7 @@ export async function POST(request: NextRequest) {
         const client = getAnthropicClient();
         const message = await client.messages.create({
           model: 'claude-3-5-haiku-20241022',
-          max_tokens: 8192,
+          max_tokens: 100000, // Increased to support long-form articles (books, essays)
           messages: [{
             role: 'user',
             content: `Extract the main article text from this HTML. Return ONLY the article content as plain text — no HTML, no markdown, no commentary. Include the title as the first line. If there is no extractable article content, respond with exactly "NO_ARTICLE_FOUND".
