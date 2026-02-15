@@ -317,7 +317,7 @@ export default function AudioPlayer({
           max={Math.floor(duration) || 0}
           onChange={handleSeek}
           aria-label="Audio progress"
-          aria-valuemin="0"
+          aria-valuemin={0}
           aria-valuemax={Math.floor(duration) || 0}
           aria-valuenow={Math.floor(currentTime) || 0}
           className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer accent-purple-600"
