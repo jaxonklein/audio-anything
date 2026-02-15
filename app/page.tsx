@@ -99,6 +99,27 @@ export default function Home() {
       return;
     }
 
+    // Validate URL format if in URL mode
+    if (inputMode === 'url') {
+      try {
+        const urlObj = new URL(url.trim());
+        // Check if protocol is http or https
+        if (!['http:', 'https:'].includes(urlObj.protocol)) {
+          setError({
+            type: 'generic',
+            message: 'Please enter a valid HTTP or HTTPS URL',
+          });
+          return;
+        }
+      } catch {
+        setError({
+          type: 'generic',
+          message: 'Please enter a valid URL (e.g., https://example.com/article)',
+        });
+        return;
+      }
+    }
+
     setIsLoading(true);
     setError(null);
 
