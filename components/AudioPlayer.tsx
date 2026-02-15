@@ -112,7 +112,8 @@ export default function AudioPlayer({
       audio.removeEventListener("timeupdate", handleTimeUpdate);
       audio.removeEventListener("ended", handleEnded);
     };
-  }, [onPlaybackUpdate]); // Removed initialPosition from deps - should only seek on initial mount
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Empty deps - only run on mount, not when callbacks change
 
   const togglePlayPause = () => {
     const audio = audioRef.current;
