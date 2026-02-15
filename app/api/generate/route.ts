@@ -5,6 +5,7 @@ import { checkRateLimit, incrementRateLimit } from '@/lib/rate-limit';
 import { checkPremiumStatus, getFeatureLimits } from '@/lib/premium';
 import { createAudioItem, updateAudioItem } from '@/lib/db';
 import { trackEvent } from '@/lib/posthog-server';
+import { generateAudio } from '@/lib/tts';
 
 const anthropic = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY,
@@ -179,27 +180,11 @@ ${html.slice(0, 100000)}
     const voiceId = voice || 'male1';
 
     try {
-      // Use BASE_URL for internal API calls, fallback to NEXTAUTH_URL, then localhost
-      const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || process.env.NEXTAUTH_URL || 'http://localhost:3000';
-      const ttsResponse = await fetch(`${baseUrl}/api/tts`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          text: articleText,
-          voiceId: voiceId,
-        }),
-      });
+      // Generate audio using shared TTS function
+      const audioBuffer = await generateAudio(articleText, voiceId);
 
-      if (!ttsResponse.ok) {
-        throw new Error('TTS generation failed');
-      }
-
-      // Get the audio blob
-      const audioBlob = await ttsResponse.blob();
-
-      // For now, convert to data URL (in production, upload to cloud storage)
-      const buffer = await audioBlob.arrayBuffer();
-      const base64Audio = Buffer.from(buffer).toString('base64');
+      // Convert to data URL (in production, upload to cloud storage)
+      const base64Audio = Buffer.from(audioBuffer).toString('base64');
       const audioDataUrl = `data:audio/mpeg;base64,${base64Audio}`;
 
       // Increment rate limit counter after successful generation
