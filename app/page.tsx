@@ -347,13 +347,20 @@ export default function Home() {
                     id="text"
                     value={text}
                     onChange={(e) => setText(e.target.value)}
+                    onKeyDown={(e) => {
+                      // Cmd/Ctrl+Enter to submit in text mode
+                      if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) {
+                        e.preventDefault();
+                        handleSubmit(e as any);
+                      }
+                    }}
                     placeholder="Paste your article text here..."
                     required
                     rows={8}
                     className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent dark:bg-gray-700 dark:text-white resize-y"
                   />
                   <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                    {text.split(/\s+/).filter(Boolean).length.toLocaleString()} words (max 5,000 for free tier)
+                    {text.split(/\s+/).filter(Boolean).length.toLocaleString()} words (max 5,000 for free tier) • Press Cmd/Ctrl+Enter to submit
                   </p>
                 </div>
               )}
