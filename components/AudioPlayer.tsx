@@ -33,6 +33,11 @@ export default function AudioPlayer({
   sourceText,
   audioItemId,
 }: AudioPlayerProps) {
+  // Diagnostic: Log version info to confirm 718a009 is deployed
+  if (typeof window !== 'undefined') {
+    console.log('[AudioPlayer] Version 718a009 loaded - fix deployed');
+  }
+
   const audioRef = useRef<HTMLAudioElement>(null);
   const sliderRef = useRef<HTMLInputElement>(null);
   const lastTimeUpdateRef = useRef<number>(0);
