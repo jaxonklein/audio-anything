@@ -6,7 +6,6 @@ import { checkPremiumStatus, getFeatureLimits } from '@/lib/premium';
 import { createAudioItem, updateAudioItem } from '@/lib/db';
 import { trackEvent } from '@/lib/posthog-server';
 import { generateAudio } from '@/lib/tts';
-import { audioCache } from '@/app/api/audio/[id]/route';
 
 // Lazily initialize Anthropic client to ensure API key is available
 let anthropic: Anthropic | null = null;
@@ -196,12 +195,9 @@ ${html.slice(0, 100000)}
       // Generate audio using shared TTS function
       const audioBuffer = await generateAudio(articleText, voiceId);
 
-      // CRITICAL FIX: Use streaming endpoint instead of data URLs
-      // Data URLs break audio seeking with longer files in production browsers
-      // Store audio in cache and serve via /api/audio/[id] endpoint
-      const audioId = `audio_${Date.now()}_${Math.random().toString(36).slice(2, 9)}`;
-      audioCache.set(audioId, audioBuffer);
-      const audioDataUrl = `/api/audio/${audioId}`;
+      // Convert to data URL (works on serverless — in-memory cache doesn't persist between requests)
+      const base64Audio = Buffer.from(audioBuffer).toString('base64');
+      const audioDataUrl = `data:audio/mpeg;base64,${base64Audio}`;
 
       // Increment rate limit counter after successful generation
       const rateLimitCookie = await incrementRateLimit(userId, isPremium);
@@ -212,7 +208,7 @@ ${html.slice(0, 100000)}
         : null; // Premium users: no expiration
 
       // Save to database if user is authenticated
-      let audioItemId = audioId;
+      let audioItemId: string | undefined;
       if (userId) {
         try {
           const audioItem = await createAudioItem(
