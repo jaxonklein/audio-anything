@@ -18,32 +18,31 @@ export async function generateAudio(text: string, voiceId: string = 'male1'): Pr
     throw new Error('ElevenLabs API key not configured');
   }
 
-  // ElevenLabs character limit: 5000 chars max per request
-  const MAX_CHARS = 5000;
+  // Use eleven_turbo_v2_5 model which supports up to 40,000 chars per request
+  // This is much higher than the older models (5000 chars)
+  const MAX_CHARS = 40000;
 
-  // Truncate text if too long, but do it at a sentence boundary for better UX
-  let textToGenerate = text;
-  if (text.length > MAX_CHARS) {
-    console.log(`[TTS] Text too long (${text.length} chars), truncating to ${MAX_CHARS} chars at sentence boundary`);
-
-    // Find last sentence ending before the limit
-    const truncated = text.substring(0, MAX_CHARS);
-    const lastPeriod = truncated.lastIndexOf('.');
-    const lastQuestion = truncated.lastIndexOf('?');
-    const lastExclamation = truncated.lastIndexOf('!');
-    const lastSentenceEnd = Math.max(lastPeriod, lastQuestion, lastExclamation);
-
-    if (lastSentenceEnd > 0) {
-      // Truncate at last complete sentence
-      textToGenerate = text.substring(0, lastSentenceEnd + 1);
-      console.log(`[TTS] Truncated at sentence boundary: ${textToGenerate.length} chars`);
-    } else {
-      // No sentence boundary found, just hard truncate
-      textToGenerate = truncated;
-      console.log(`[TTS] No sentence boundary found, hard truncating at ${MAX_CHARS} chars`);
-    }
+  // If text fits in single request, generate directly
+  if (text.length <= MAX_CHARS) {
+    console.log(`[TTS] Generating audio for ${text.length} characters in single request`);
+    return await generateChunk(text, elevenLabsVoiceId);
   }
 
+  // For very long text (>40k chars), truncate at sentence boundary
+  // This handles edge cases like entire books
+  console.log(`[TTS] Text very long (${text.length} chars), truncating to ${MAX_CHARS} chars at sentence boundary`);
+
+  const truncated = text.substring(0, MAX_CHARS);
+  const lastPeriod = truncated.lastIndexOf('.');
+  const lastQuestion = truncated.lastIndexOf('?');
+  const lastExclamation = truncated.lastIndexOf('!');
+  const lastSentenceEnd = Math.max(lastPeriod, lastQuestion, lastExclamation);
+
+  const textToGenerate = lastSentenceEnd > 0
+    ? text.substring(0, lastSentenceEnd + 1)
+    : truncated;
+
+  console.log(`[TTS] Truncated at sentence boundary: ${textToGenerate.length} chars`);
   return await generateChunk(textToGenerate, elevenLabsVoiceId);
 }
 
@@ -60,7 +59,7 @@ async function generateChunk(text: string, elevenLabsVoiceId: string): Promise<A
       },
       body: JSON.stringify({
         text,
-        model_id: 'eleven_monolingual_v1',
+        model_id: 'eleven_turbo_v2_5', // Supports up to 40,000 chars (vs 5,000 for v1)
         voice_settings: {
           stability: 0.5,
           similarity_boost: 0.5,
